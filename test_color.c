@@ -4,14 +4,13 @@
 
 int main(int argc, const char *argv[])
 {
-	fprintf(stdout, "Hello world!\n");
+	Color red, blue, green;
 
-	Color c1;
-
-	CreateColor(&c1, 0, 10, 20);
-	fprintf(stdout, "Created color!\n");
-	fprintf(stdout, "Red: %d Green: %d Blue: %d\n", c1.r, c1.g, c1.b);
-
+	CreateColor(&red, 255, 0, 0);
+	CreateColor(&green, 0, 255, 0);
+	CreateColor(&blue, 0, 0, 255);
+	fprintf(stdout, "Created colors!\n");
+	fprintf(stdout, "Red: %d-%d-%d\nGreen: %d-%d-%d\nBlue: %d-%d-%d\n", red.r, red.g, red.b, green.r, green.g, green.b, blue.r, blue.g, blue.b);
 	
 	return 0;
 }
