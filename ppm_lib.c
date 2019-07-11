@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <malloc.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <malloc.h>
 
 
 /*
@@ -16,6 +16,7 @@ typedef struct ppmImage
 } ppmImg;
 
 
+/*
 int main(int argc, char *argv[])
 {
 	int width, height, *img;
@@ -57,3 +58,4 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+*/

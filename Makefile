@@ -1,10 +1,12 @@
 CC = gcc
+CFLAGS = -o
 
-TARGET = main
+EXECUTABLE = main
 
 COLOR_LIB = color.c
 TEST_COLOR = test_color.c color.c
-TEST_COLOR_TARGET = test_color
+TEST_COLOR_EXECUTABLE = test_color
+
 
 ifeq ($(OS),Windows_NT) 
 	REMOVE = del /f
@@ -13,13 +15,13 @@ else
 endif
 
 
-all: $(TARGET)
+all: $(EXECUTABLE)
 
-$(TARGET):
-	$(CC) -o $(TARGET) main.c $(COLOR_LIB)
+$(EXECUTABLE):
+	$(CC) $(CFLAGS) $(EXECUTABLE) main.c $(COLOR_LIB)
 
 test_color:
-	$(CC) -o $(TEST_COLOR_TARGET) $(TEST_COLOR)
+	$(CC) $(CFLAGS) $(TEST_COLOR_EXECUTABLE) $(TEST_COLOR)
 
 clean:
-	$(REMOVE) *.exe *.o
+	$(REMOVE) *.exe *.o $(EXECUTABLE) $(TEST_COLOR_EXECUTABLE)

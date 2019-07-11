@@ -4,36 +4,25 @@
 
 int main(int argc, const char *argv[])
 {
-	Color red, green, blue;
-	Color red1, green1, blue1;
-
-	CreateColor(&red, 255, 0, 0);
-	CreateColor(&green, 0, 255, 0);
-	CreateColor(&blue, 0, 0, 255);
-
-	Color8bit(&red, &red1);
-	Color8bit(&green, &green1);
-	Color8bit(&blue, &blue1);
-
-	//fprintf(stdout, "Standart red: %d-%d-%d\nSmall red: %d-%d-%d\n", red.r, red.g, red.b, red1.r, red1.g, red1.b);
-
 	FILE* ppmimg;
-	ppmimg = fopen("ppmimg2.ppm", "wb");
+	ppmimg = fopen("ppmimg40x40.ppm", "wb");
 
 	// Writing Magic Number to the File
 	fprintf(ppmimg, "P6\n");
 
 	// Writing Width and Height
-	fprintf(ppmimg, "%d %d\n", 3, 1);
+	fprintf(ppmimg, "%d %d\n", 40, 40);
 
 	// Writing the maximum gray value
 	fprintf(ppmimg, "255\n");
 
-	fprintf(ppmimg, "%c\n", red1.r << 5 + red1.g << 2 + red1.b);
-	fprintf(ppmimg, "%c\n", green1.r << 5 + green1.g << 2 + green1.b);
-	fprintf(ppmimg, "%c\n", blue1.r << 5 + blue1.g << 2 + blue1.b);
-
-	fclose(ppmimg);
+	for (int i = 1; i < 41; i++)
+	{
+		for (int j = 1; j < 41; j++)
+		{
+			fprintf(ppmimg, "%c%c%c", i*6, j*6, (i+j)*3);
+		}
+	}
 
 	return 0;
 }
