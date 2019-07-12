@@ -30,6 +30,8 @@ typedef struct ppmImg
 
 ppmImg * CreateImg(int width, int height, int maxVal);
 
+int * ptrImg(ppmImg * img, int x, int y);
+
 int SetPixelColor(ppmImg * img, int x, int y, Color * color);
 
 Color * GetPixelColor(ppmImg * img, int x , int y);

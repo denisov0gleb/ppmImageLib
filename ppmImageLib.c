@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include "ppmImageLib.h"
 
 /*****************************************
@@ -38,13 +38,18 @@ ppmImg * CreateImg(int width, int height, int maxVal)
 }
 
 
-int SetPixelColor(ppmImg * image, int x, int y, Color * color)
+int SetPixelColor(ppmImg * img, int x, int y, Color * color)
 {
-	*(image->img + x*image->width + y) = 1;
+	*(int *) ptrImg(img, x, y) = 1;
 
 	return 0;
 }
 
+
+int * ptrImg(ppmImg * img, int x, int y)
+{
+	return (int *) (img->img + y*img->width + x);
+}
 
 /*
  * Usage:
@@ -63,14 +68,11 @@ int main()
 	Color * red = CreateColor(1, 2, 3);
 	fprintf(stdout, "Start!\n");
 	ppmImg * img1 = CreateImg(4, 4, 255);
-	fprintf(stdout, "Continue!\nwidth = %d, height = %d deep = %d\n", img1->width, img1->height, img1->maxVal);
-	fprintf(stdout, "Format: %s\n", img1->format);
-	fprintf(stdout, "Color: %d, %d, %d\n", red->r, red->g, red->b);
 
 	SetPixelColor(img1, 1, 2, red);
 
-	fprintf(stdout, "Image color: %d\n", *(img1->img + 1*img1->width + 2));
-	fprintf(stdout, "Image color 0: %d\n", *(img1->img + 1*img1->width + 1));
+	fprintf(stdout, "Image color: %d\n", *(int *)ptrImg(img1, 1, 2) );
+	fprintf(stdout, "Test Image color: %d\n", *(int * )ptrImg(img1, 1, 2));
 
 	return 0;
 }
