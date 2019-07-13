@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "ppmImageLib.h"
 
+
 /*****************************************
  * Color part
  ****************************************/
@@ -28,7 +29,10 @@ Color * CreateColor(unsigned char red, unsigned char green, unsigned char blue)
 ppmImg * CreateImg(int width, int height, int maxVal)
 {
 	ppmImg * img = malloc(sizeof(ppmImg));
-	img->img = (int *) malloc(width * height * sizeof(int));
+
+	img->img = malloc(width * height * sizeof(Color));
+	img->imgPtr = &img->img;
+
 	img->width = width;
 	img->height = height;
 	img->maxVal = maxVal;
@@ -38,18 +42,32 @@ ppmImg * CreateImg(int width, int height, int maxVal)
 }
 
 
-int SetPixelColor(ppmImg * img, int x, int y, Color * color)
+void SetPixelColor(ppmImg * img, int x, int y, Color * color)
 {
-	*(int *) ptrImg(img, x, y) = 1;
-
-	return 0;
+	img->img[arr2D(img, x, y)] = *color;
 }
 
 
-int * ptrImg(ppmImg * img, int x, int y)
+/*
+ * Return integer as index made from 2D array
+ */
+int arr2D(ppmImg * img, int x, int y)
 {
-	return (int *) (img->img + y*img->width + x);
+	return (int) (y*img->width + x);
 }
+
+
+void SetBackgroundColor(ppmImg * img, Color * color)
+{
+	for (int i = 0; i < img->width; i++)
+	{
+		for (int j = 0; j < img->height; j++)
+		{
+			SetPixelColor(img, i, j, color);
+		}
+	}
+}
+
 
 /*
  * Usage:
@@ -57,22 +75,30 @@ int * ptrImg(ppmImg * img, int x, int y)
  */
 Color * GetPixelColor(ppmImg * img, int x , int y)
 {
-	Color * color = malloc(sizeof(Color));
-
-	return color;
+	return &img->img[arr2D(img, x, y)];
 }
 
 
-int main()
+void WriteImgToFile(ppmImg * img, char * fileName)
 {
-	Color * red = CreateColor(1, 2, 3);
-	fprintf(stdout, "Start!\n");
-	ppmImg * img1 = CreateImg(4, 4, 255);
+	FILE * imgFile;
+	imgFile = fopen(fileName, "wb");
+	fprintf(imgFile, "%s\n%d %d\n%d\n", img->format, img->width, img->height, img->maxVal);
 
-	SetPixelColor(img1, 1, 2, red);
+	for (int x = 0; x < img->width; x++)
+	{
+		for (int y = 0; y < img->height; y++)
+		{
+			fprintf(imgFile, "%d %d %d\n", img->img[arr2D(img, x, y)].r, img->img[arr2D(img, x, y)].g, img->img[arr2D(img, x, y)].b);
+		}
+	}
 
-	fprintf(stdout, "Image color: %d\n", *(int *)ptrImg(img1, 1, 2) );
-	fprintf(stdout, "Test Image color: %d\n", *(int * )ptrImg(img1, 1, 2));
+	fclose(imgFile);
+}
 
-	return 0;
+
+void DeleteImg(ppmImg * img)
+{
+	free(img->img);
+	free(img);
 }

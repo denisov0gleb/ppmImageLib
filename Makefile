@@ -3,9 +3,9 @@ CFLAGS = -o
 
 EXECUTABLE = main
 
-COLOR_LIB = color.c
-TEST_COLOR = test_color.c color.c
-TEST_COLOR_EXECUTABLE = test_color
+LIBS = ppmImageLib.c
+TEST_PPMIMAGELIB = test_ppmImageLib.c ppmImageLib.c
+EXECUTABLE_PPMIMAGELIB = ppmImageLib
 
 
 ifeq ($(OS),Windows_NT) 
@@ -18,10 +18,10 @@ endif
 all: $(EXECUTABLE)
 
 $(EXECUTABLE):
-	$(CC) $(CFLAGS) $(EXECUTABLE) main.c $(COLOR_LIB)
+	$(CC) $(CFLAGS) $(EXECUTABLE) main.c $(LIBS)
 
-test_color:
-	$(CC) $(CFLAGS) $(TEST_COLOR_EXECUTABLE) $(TEST_COLOR)
+ppmImageLib:
+	$(CC) $(CFLAGS) $(EXECUTABLE_PPMIMAGELIB) $(TEST_PPMIMAGELIB)
 
 clean:
-	$(REMOVE) *.exe *.o $(EXECUTABLE) $(TEST_COLOR_EXECUTABLE)
+	$(REMOVE) *.exe *.o $(EXECUTABLE) $(EXECUTABLE_PPMIMAGELIB)
