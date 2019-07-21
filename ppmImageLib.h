@@ -56,6 +56,18 @@ Color * GetPixelColor(ppmImg * img, int x , int y);
 
 void WriteImgToFile(ppmImg * img, char * fileName);
 
+/*
+ * For "P3" format
+ * Generates human-readable image
+ */
+void WriteImgToFileASCII(ppmImg * img, char * fileName);
+
+/*
+ * For "P6" format
+ * Generates PC-readable image
+ */
+void WriteImgToFileBinary(ppmImg * img, char * fileName);
+
 //int ReadImgFromFile(ppmImg * img, char * fileName);
 
 void DeleteImg(ppmImg * img);

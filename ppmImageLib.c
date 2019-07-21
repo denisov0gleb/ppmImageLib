@@ -41,7 +41,7 @@ ppmImg * CreateImg(int width, int height, int maxVal)
 	img->width = width;
 	img->height = height;
 	img->maxVal = maxVal;
-	img->format = "P3";
+	img->format = "P6";
 
 	return img;
 }
@@ -84,7 +84,39 @@ Color * GetPixelColor(ppmImg * img, int x , int y)
 }
 
 
-void WriteImgToFile(ppmImg * img, char * fileName)
+void WriteImgToFile(ppmImg * img, char * filename)
+{
+	if (img->format[1] == '3')
+	{
+		WriteImgToFileASCII(img, filename);
+
+	}
+	else if (img->format[1] == '6')
+	{
+		WriteImgToFileBinary(img, filename);
+	}
+}
+
+
+void WriteImgToFileBinary(ppmImg * img, char * fileName)
+{
+	FILE * imgFile;
+	imgFile = fopen(fileName, "wb");
+	fprintf(imgFile, "%s\n%d %d\n%d\n", img->format, img->width, img->height, img->maxVal);
+
+	for (int x = 0; x < img->width; x++)
+	{
+		for (int y = 0; y < img->height; y++)
+		{
+			fprintf(imgFile, "%c%c%c", img->img[arr2D(img, x, y)].r, img->img[arr2D(img, x, y)].g, img->img[arr2D(img, x, y)].b);
+		}
+	}
+
+	fclose(imgFile);
+}
+
+
+void WriteImgToFileASCII(ppmImg * img, char * fileName)
 {
 	FILE * imgFile;
 	imgFile = fopen(fileName, "wb");
