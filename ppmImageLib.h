@@ -12,6 +12,10 @@ typedef struct Color
 } Color;
 
 
+/*
+ * Usage:
+ * 		Color * red = CreateColor(255, 0, 0);
+ */
 Color * CreateColor(unsigned char red, unsigned char green, unsigned char blue);
 
 
@@ -29,6 +33,10 @@ typedef struct ppmImg
 } ppmImg;
 
 
+/*
+ * Usage:
+ * 		ppmImg * img1 = CreateImg(4, 4, 255);
+ */
 ppmImg * CreateImg(int width, int height, int maxVal);
 
 /*
@@ -40,6 +48,10 @@ void SetPixelColor(ppmImg * img, int x, int y, Color * color);
 
 void SetBackgroundColor(ppmImg * img, Color * color);
 
+/*
+ * Usage:
+ * 		Color * c1 = GetPixelColor(img, x, y);
+ */
 Color * GetPixelColor(ppmImg * img, int x , int y);
 
 void WriteImgToFile(ppmImg * img, char * fileName);

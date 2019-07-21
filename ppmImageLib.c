@@ -6,6 +6,11 @@
 /*****************************************
  * Color part
  ****************************************/
+
+/*
+ * Usage:
+ * 		Color * red = CreateColor(255, 0, 0);
+ */
 Color * CreateColor(unsigned char red, unsigned char green, unsigned char blue)
 {
 	Color * color = malloc(sizeof(Color));
