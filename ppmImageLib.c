@@ -64,9 +64,11 @@ int arr2D(ppmImg * img, int x, int y)
 
 void SetBackgroundColor(ppmImg * img, Color * color)
 {
-	for (int i = 0; i < img->width; i++)
+	int i, j;
+
+	for (i = 0; i < img->width; i++)
 	{
-		for (int j = 0; j < img->height; j++)
+		for (j = 0; j < img->height; j++)
 		{
 			SetPixelColor(img, i, j, color);
 		}
@@ -101,12 +103,14 @@ void WriteImgToFile(ppmImg * img, char * filename)
 void WriteImgToFileBinary(ppmImg * img, char * fileName)
 {
 	FILE * imgFile;
+	int x, y;
+
 	imgFile = fopen(fileName, "wb");
 	fprintf(imgFile, "%s\n%d %d\n%d\n", img->format, img->width, img->height, img->maxVal);
 
-	for (int x = 0; x < img->width; x++)
+	for (y = 0; y < img->height; y++)
 	{
-		for (int y = 0; y < img->height; y++)
+		for (x = 0; x < img->width; x++)
 		{
 			fprintf(imgFile, "%c%c%c", img->img[arr2D(img, x, y)].r, img->img[arr2D(img, x, y)].g, img->img[arr2D(img, x, y)].b);
 		}
@@ -119,12 +123,14 @@ void WriteImgToFileBinary(ppmImg * img, char * fileName)
 void WriteImgToFileASCII(ppmImg * img, char * fileName)
 {
 	FILE * imgFile;
+	int x, y;
+
 	imgFile = fopen(fileName, "wb");
 	fprintf(imgFile, "%s\n%d %d\n%d\n", img->format, img->width, img->height, img->maxVal);
 
-	for (int x = 0; x < img->width; x++)
+	for (y = 0; y < img->height; y++)
 	{
-		for (int y = 0; y < img->height; y++)
+		for (x = 0; x < img->width; x++)
 		{
 			fprintf(imgFile, "%d %d %d\n", img->img[arr2D(img, x, y)].r, img->img[arr2D(img, x, y)].g, img->img[arr2D(img, x, y)].b);
 		}

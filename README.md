@@ -22,7 +22,8 @@ int main(int argc, const char *argv[])
 
 	SetBackgroundColor(img1, red);
 
-	for (int i = 0; i < img1->width; i++)
+	int i;
+	for (i = 0; i < img1->width; i++)
 	{
 		SetPixelColor(img1, i, i, black);
 	}
