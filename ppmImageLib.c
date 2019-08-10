@@ -23,6 +23,15 @@ Color * CreateColor(unsigned char red, unsigned char green, unsigned char blue)
 }
 
 
+int ColorCompare(Color * c1, Color * c2)
+{
+	if ( ( c1->r == c2->r ) && ( c1->g == c2->g ) && ( c1->b == c2->b ) ) 
+		return 1;
+	else
+		return 0;
+}
+
+
 /*****************************************
  * ppmImage part
  ****************************************/

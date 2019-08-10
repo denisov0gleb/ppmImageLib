@@ -19,6 +19,12 @@ typedef struct Color
 Color * CreateColor(unsigned char red, unsigned char green, unsigned char blue);
 
 
+/*
+ * Return 1 if equal colors, and 0 if not
+ */
+int ColorCompare(Color * c1, Color * c2);
+
+
 /*****************************************
  * ppmImage part
  ****************************************/

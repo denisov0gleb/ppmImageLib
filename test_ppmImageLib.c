@@ -5,7 +5,10 @@
 int main(int argc, const char *argv[])
 {
 	Color * red = CreateColor(255, 0, 0);
+	Color * redCopy = CreateColor(255, 0, 0);
 	Color * black = CreateColor(0, 0, 0);
+
+	fprintf(stdout, "Red = red: %d\nRed = black: %d\n", ColorCompare(red, redCopy), ColorCompare(red, black));
 
 	ppmImg * img1 = CreateImg(128, 128, 255);
 
