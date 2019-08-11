@@ -5,7 +5,7 @@ EXECUTABLE = main
 
 LIBS = ppmImageLib.c
 TEST_PPMIMAGELIB = test_ppmImageLib.c ppmImageLib.c
-EXECUTABLE_PPMIMAGELIB = ppmImageLib
+EXECUTABLE_PPMIMAGELIB = test_ppmImageLib
 
 
 ifeq ($(OS),Windows_NT) 
@@ -20,7 +20,7 @@ all: $(EXECUTABLE)
 $(EXECUTABLE):
 	$(CC) $(CFLAGS) $(EXECUTABLE) main.c $(LIBS)
 
-ppmImageLib:
+test:
 	$(CC) $(CFLAGS) $(EXECUTABLE_PPMIMAGELIB) $(TEST_PPMIMAGELIB)
 
 clean:
